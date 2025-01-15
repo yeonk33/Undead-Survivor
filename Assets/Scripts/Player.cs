@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     public float speed = 3.0f;
+    public Vector2 inputVec;
 
-    private Vector2 inputVec;
     private Rigidbody2D rigid;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
