@@ -7,10 +7,14 @@ public class Player : MonoBehaviour
 
     private Vector2 inputVec;
     private Rigidbody2D rigid;
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
 
     private void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
 	private void FixedUpdate()
@@ -23,4 +27,13 @@ public class Player : MonoBehaviour
     {
         inputVec = value.Get<Vector2>();
     }
+
+	private void LateUpdate()
+	{
+        animator.SetFloat("Speed", inputVec.magnitude);
+
+		if (inputVec.x != 0) {
+			spriteRenderer.flipX = inputVec.x < 0;
+		}
+	}
 }
