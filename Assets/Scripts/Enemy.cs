@@ -1,20 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     public float Speed;
+	public float Health;
+	public float MaxHealth;
+	public RuntimeAnimatorController[] AnimControllers;
     public Rigidbody2D Target;
 
-    private bool isLive = true;
+    private bool isLive;
     private Rigidbody2D rigid;
     private SpriteRenderer spriteRenderer;
+	private Animator animator;
+
+	private void OnEnable()
+	{
+		Target = GameManager.Instance.Player.GetComponent<Rigidbody2D>();
+		isLive = true;
+		Health = MaxHealth;
+	}
 
 	private void Awake()
 	{
 		rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+		animator = GetComponent<Animator>();
 	}
 
 	private void FixedUpdate()
@@ -33,5 +46,13 @@ public class Enemy : MonoBehaviour
 	{
 		if (!isLive) return;
 		spriteRenderer.flipX = Target.position.x < rigid.position.x;
+	}
+
+	public void Init(SpawnData data)
+	{
+		animator.runtimeAnimatorController = AnimControllers[data.SpriteType];
+		Speed = data.Speed;
+		MaxHealth = data.Health;
+		Health = data.Health;
 	}
 }
