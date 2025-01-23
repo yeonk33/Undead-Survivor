@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -7,6 +8,14 @@ public class Weapon : MonoBehaviour
 	public float Damage;
 	public int Count;
 	public float Speed;
+
+	private float timer;
+	private Player player;
+
+	private void Awake()
+	{
+		player = GetComponentInParent<Player>();	// 부모 오브젝트에서 컴포넌트 가져오기
+	}
 
 	private void Start()
 	{
@@ -21,14 +30,20 @@ public class Weapon : MonoBehaviour
 				break;
 
 			default:
+				timer += Time.deltaTime;
+				if (timer > Speed) {
+					timer = 0;
+					Fire();
+				}
 				break;
 		}
 
 		// test
 		if (Input.GetButtonDown("Jump")) {
-			LevelUp(20, 5);
+			LevelUp(20, 1);
 		}
 	}
+
 
 	public void Init()
 	{
@@ -39,6 +54,7 @@ public class Weapon : MonoBehaviour
 				break;
 
 			default:
+				Speed = 0.3f;	// 연사속도 (0.3f초마다 발사)
 				break;
 		}
 	}
@@ -62,7 +78,7 @@ public class Weapon : MonoBehaviour
 			bullet.Rotate(rotateVector);
 			bullet.Translate(bullet.up * 1.5f, Space.World);
 
-			bullet.GetComponent<Bullet>().Init(Damage, -1);	// -1은 무한 관통
+			bullet.GetComponent<Bullet>().Init(Damage, -1, Vector3.zero);	// -1은 무한 관통
 		}
 	}
 
@@ -72,9 +88,20 @@ public class Weapon : MonoBehaviour
 		this.Count += count;
 
 		if (Id == 0) Batch();
+	}
 
+	private void Fire()
+	{
+		if (!player.Scanner.NearestTarget) {    // null이라면
+			return;
+		}
 
+		Vector3 targetPosition = player.Scanner.NearestTarget.position;
+		Vector3 dir = (targetPosition - transform.position).normalized;
 
-
+		Transform bullet = GameManager.Instance.Pool.Get(PrefabId).transform;
+		bullet.position = transform.position;
+		bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+		bullet.GetComponent<Bullet>().Init(Damage, Count, dir);
 	}
 }
