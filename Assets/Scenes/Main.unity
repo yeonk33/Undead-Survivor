@@ -4536,6 +4536,55 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &371453917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 371453918}
+  - component: {fileID: 371453919}
+  m_Layer: 0
+  m_Name: Weapon 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &371453918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371453917}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 409556784}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &371453919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371453917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da46f0ff2e7a07f448aa6e0ceda1edaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Id: 0
+  PrefabId: 1
+  Damage: 11
+  Count: 10
+  Speed: 0
 --- !u!1 &401190489
 GameObject:
   m_ObjectHideFlags: 0
@@ -4684,6 +4733,7 @@ Transform:
   - {fileID: 782523929}
   - {fileID: 2135391333}
   - {fileID: 1054333279}
+  - {fileID: 371453918}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &409556785
@@ -14043,6 +14093,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefabs:
   - {fileID: 7518918246625514063, guid: fd0382ffc2cc6d34cbfe340485c28670, type: 3}
+  - {fileID: 5747798639061743468, guid: c44efe984b336614c8ccba24659245e5, type: 3}
 --- !u!4 &1150114367
 Transform:
   m_ObjectHideFlags: 0
@@ -18825,5 +18876,5 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 903106357}
   - {fileID: 1150114367}
-  - {fileID: 409556784}
   - {fileID: 1600112799}
+  - {fileID: 409556784}

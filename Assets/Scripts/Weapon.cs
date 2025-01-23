@@ -43,6 +43,11 @@ public class Weapon : MonoBehaviour
 		for (int i = 0; i < Count; i++) {
 			Transform bullet = GameManager.Instance.Pool.Get(PrefabId).transform;
 			bullet.parent = transform;  // 새롭게 생성된 bullet이 Weapon 아래로 생긴다..?
+
+			Vector3 rotateVector = Vector3.forward * 360 * i / Count;	// 360도를 무기 개수만큼 나눠서 배치
+			bullet.Rotate(rotateVector);
+			bullet.Translate(bullet.up * 1.5f, Space.World);
+
 			bullet.GetComponent<Bullet>().Init(Damage, -1);	// -1은 무한 관통
 		}
 	}
