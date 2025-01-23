@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -54,5 +56,26 @@ public class Enemy : MonoBehaviour
 		Speed = data.Speed;
 		MaxHealth = data.Health;
 		Health = data.Health;
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (!collision.CompareTag("Bullet")) return;
+
+		Health -= collision.GetComponent<Bullet>().Damage;
+
+		if (Health > 0) {
+			// Hit action
+
+		} else {
+			Dead();
+		}
+
+	}
+
+	private void Dead()
+	{
+		// object pooling 사용중이므로 파괴X 비활성화만
+		gameObject.SetActive(false);
 	}
 }
