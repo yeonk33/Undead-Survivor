@@ -5,11 +5,11 @@ public class Bullet : MonoBehaviour
 	public float Damage;
 	public int Per;
 
-	private Rigidbody2D rigidbody2D;
+	private Rigidbody2D rigid;
 
 	private void Awake()
 	{
-		rigidbody2D = GetComponent<Rigidbody2D>();
+		rigid = GetComponent<Rigidbody2D>();
 	}
 
 	/// <summary>
@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
 		this.Per = per;
 
 		if (per > -1) {	// 원거리 무기에만 아래 적용
-			rigidbody2D.velocity = dir;
+			rigid.velocity = dir;
 		}
 	}
 
@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour
 
 		Per--;
 		if (Per == -1) {
-			rigidbody2D.velocity = Vector2.zero;
+			rigid.velocity = Vector2.zero;
 			gameObject.SetActive(false);	// object pooling
 		}
 	}

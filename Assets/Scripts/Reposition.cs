@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Reposition : MonoBehaviour
 {
-	private Collider2D collider;
+	private Collider2D coll;
 	
 	private void Awake()
 	{
-		collider = GetComponent<Collider2D>();
+		coll = GetComponent<Collider2D>();
 	}
 
 	private void OnTriggerExit2D(Collider2D collision)
@@ -35,7 +35,7 @@ public class Reposition : MonoBehaviour
 				break;
 
 			case "Enemy":
-				if (collider.enabled) { // 몹이 살아있다
+				if (coll.enabled) { // 몹이 살아있다
 					transform.Translate(playerDir * 20 
 						+ new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0)); // 너무 가까이 스폰되면 카메라에 보일수 있음
 				}
