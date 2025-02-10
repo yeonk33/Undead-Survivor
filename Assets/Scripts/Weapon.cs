@@ -14,12 +14,7 @@ public class Weapon : MonoBehaviour
 
 	private void Awake()
 	{
-		player = GetComponentInParent<Player>();	// 부모 오브젝트에서 컴포넌트 가져오기
-	}
-
-	private void Start()
-	{
-		Init();
+		player = GameManager.Instance.Player;
 	}
 
 	private void Update()
@@ -45,8 +40,25 @@ public class Weapon : MonoBehaviour
 	}
 
 
-	public void Init()
+	public void Init(ItemData data)
 	{
+		// Basic setting
+		name = "Weapon " + data.ItemId;
+		transform.parent = player.transform;	// Player의 자식 오브젝트로 등록
+		transform.localPosition = Vector3.zero; // 플레이어 아래의 위치에서 (0,0,0)으로 설정
+
+		// Property setting
+		Id = data.ItemId;
+		Damage = data.BaseDamage;
+		Count = data.BaseCount;
+
+		for (int i = 0; i < GameManager.Instance.Pool.Prefabs.Length; i++) {
+			if (data.Projectile == GameManager.Instance.Pool.Prefabs[i]) {
+				PrefabId = i;
+				break;
+			}
+		}
+
 		switch (Id) {
 			case 0:
 				Speed = -150;   // 마이너스여야 시계방향
