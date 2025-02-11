@@ -69,6 +69,8 @@ public class Weapon : MonoBehaviour
 				Speed = 0.3f;	// 연사속도 (0.3f초마다 발사)
 				break;
 		}
+
+		player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);   // 모든 자식 오브젝트에게 해당 함수 실행 명령
 	}
 
 	private void Batch()
@@ -100,6 +102,8 @@ public class Weapon : MonoBehaviour
 		this.Count += count;
 
 		if (Id == 0) Batch();
+
+		player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);	// 모든 자식 오브젝트에게 해당 함수 실행 명령
 	}
 
 	private void Fire()
