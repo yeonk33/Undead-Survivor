@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
 		this.Per = per;
 
 		if (per > -1) {	// 원거리 무기에만 아래 적용
-			rigid.velocity = dir;
+			rigid.velocity = dir * 15f;
 		}
 	}
 
