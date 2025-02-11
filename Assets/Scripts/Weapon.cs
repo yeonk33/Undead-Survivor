@@ -70,6 +70,11 @@ public class Weapon : MonoBehaviour
 				break;
 		}
 
+		// Hand set
+		Hand hand = player.Hands[(int)data.ItemTypeValue];
+		hand.sprite.sprite = data.Hand;
+		hand.gameObject.SetActive(true);
+
 		player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);   // 모든 자식 오브젝트에게 해당 함수 실행 명령
 	}
 

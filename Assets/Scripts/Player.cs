@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     public float speed = 3.0f;
     public Vector2 inputVec;
     public Scanner Scanner;
+    public Hand[] Hands;
 
     private Rigidbody2D rigid;
     private SpriteRenderer spriteRenderer;
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         Scanner = GetComponent<Scanner>();
+        Hands = GetComponentsInChildren<Hand>(true); // true : 비활성화된 자식도 Get
     }
 
 	private void FixedUpdate()
