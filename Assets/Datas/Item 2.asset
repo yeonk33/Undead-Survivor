@@ -15,8 +15,7 @@ MonoBehaviour:
   ItemTypeValue: 2
   ItemId: 2
   ItemName: "\uD14C\uD06C\uB2C8\uCEEC \uC7A5\uAC11"
-  ItemDescription: "\uC5F0\uC0AC\uB825 \uC0C1\uC2B9\uB418\uB294 \uC544\uC774\uD15C?
-    \uBB34\uAE30 \uC544\uB2D8"
+  ItemDescription: "\uC5F0\uC0AC\uC18D\uB3C4 {0}% \uC99D\uAC00"
   ItemIcon: {fileID: -201829820, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   BaseDamage: 0
   BaseCount: 0
@@ -28,3 +27,4 @@ MonoBehaviour:
   - 0.75
   Counts: 0000000000000000000000000000000000000000
   Projectile: {fileID: 0}
+  Hand: {fileID: 0}

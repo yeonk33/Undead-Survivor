@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemTypeValue: 3
   ItemId: 3
   ItemName: "\uC804\uD22C \uC7A5\uD654"
-  ItemDescription: "\uC774\uC18D \uC5C5"
+  ItemDescription: "\uC774\uB3D9\uC18D\uB3C4 {0}% \uC99D\uAC00"
   ItemIcon: {fileID: -966295699, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   BaseDamage: 0
   BaseCount: 0
@@ -27,3 +27,4 @@ MonoBehaviour:
   - 0.5
   Counts: 0000000000000000000000000000000000000000
   Projectile: {fileID: 0}
+  Hand: {fileID: 0}

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 	[Header("# Game Object")]
 	public PoolManager Pool;
 	public Player Player;
+	public LevelUp UILevelUp;
 
 	[Header("# Game Control")]
 	public float GameTime;
@@ -42,9 +43,10 @@ public class GameManager : MonoBehaviour
 	public void GetEXP()
 	{
 		EXP++;
-		if (EXP == NextEXP[Level]) {
+		if (EXP == NextEXP[Level]) {	// ·¹º§¾÷
 			Level++;
 			EXP = 0;
+			UILevelUp.Show();
 		}
 	}
 }
