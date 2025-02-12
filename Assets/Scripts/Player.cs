@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+        if (!GameManager.Instance.IsLive) return;
         Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
 		rigid.MovePosition(rigid.position + nextVec);
 	}
@@ -34,7 +35,8 @@ public class Player : MonoBehaviour
 
 	private void LateUpdate()
 	{
-        animator.SetFloat("Speed", inputVec.magnitude);
+		if (!GameManager.Instance.IsLive) return;
+		animator.SetFloat("Speed", inputVec.magnitude);
 
 		if (inputVec.x != 0) {
 			spriteRenderer.flipX = inputVec.x < 0;

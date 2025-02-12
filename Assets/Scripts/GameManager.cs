@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 	[Header("# Game Control")]
 	public float GameTime;
 	public float MaxGameTime = 2 * 10f;
+	public bool IsLive;
 
 	[Header("# Player Info")]
 	public int Health;
@@ -29,10 +30,15 @@ public class GameManager : MonoBehaviour
 	private void Start()
 	{
 		Health = MaxHealth;
+		IsLive = true;
+		// @@임시로 일단 근접무기 지급
+		UILevelUp.Select(0);
 	}
 
 	private void Update()
 	{
+		if (!IsLive) return;
+
 		GameTime += Time.deltaTime;
 
 		if (GameTime > MaxGameTime) {
@@ -43,10 +49,22 @@ public class GameManager : MonoBehaviour
 	public void GetEXP()
 	{
 		EXP++;
-		if (EXP == NextEXP[Level]) {	// 레벨업
+		if (EXP == NextEXP[Mathf.Min(Level, NextEXP.Length-1)]) {	// 레벨업
 			Level++;
 			EXP = 0;
 			UILevelUp.Show();
 		}
+	}
+
+	public void Stop()
+	{
+		IsLive = false;
+		Time.timeScale = 0;	// 유니티의 시간
+	}
+
+	public void Resume()
+	{
+		IsLive = true;
+		Time.timeScale = 1; // 유니티의 시간
 	}
 }
