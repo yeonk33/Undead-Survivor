@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +10,8 @@ public class GameManager : MonoBehaviour
 	public PoolManager Pool;
 	public Player Player;
 	public LevelUp UILevelUp;
+	public Result UIResult;
+	public GameObject EnemyCleaner;
 
 	[Header("# Game Control")]
 	public float GameTime;
@@ -15,8 +19,8 @@ public class GameManager : MonoBehaviour
 	public bool IsLive;
 
 	[Header("# Player Info")]
-	public int Health;
-	public int MaxHealth = 100;
+	public float Health;
+	public float MaxHealth = 100;
 	public int Level;
 	public int Kill;
 	public int EXP;
@@ -29,10 +33,48 @@ public class GameManager : MonoBehaviour
 
 	public void GameStart()
 	{
-		Health = MaxHealth;
-		IsLive = true;
+		Health = MaxHealth;		
 		// @@임시로 일단 근접무기 지급
 		UILevelUp.Select(0);
+		Resume();
+	}
+
+	public void GameOver()
+	{
+		StartCoroutine(GameOverRoutine());
+	}
+
+	IEnumerator GameOverRoutine()
+	{
+		IsLive = false;
+
+		yield return new WaitForSeconds(0.5f);
+
+		UIResult.gameObject.SetActive(true);
+		UIResult.Lose();
+		Stop();
+	}
+
+	public void GameVictory()
+	{
+		StartCoroutine(GameVictoryRoutine());
+	}
+
+	IEnumerator GameVictoryRoutine()
+	{
+		IsLive = false;
+		EnemyCleaner.SetActive(true);	// 모든 enemy kill
+
+		yield return new WaitForSeconds(0.5f);
+
+		UIResult.gameObject.SetActive(true);
+		UIResult.Win();
+		Stop();
+	}
+
+	public void GameRetry()
+	{
+		SceneManager.LoadScene(0);
 	}
 
 	private void Update()
@@ -43,11 +85,14 @@ public class GameManager : MonoBehaviour
 
 		if (GameTime > MaxGameTime) {
 			GameTime = MaxGameTime;
+			GameVictory();
 		}
 	}
 
 	public void GetEXP()
 	{
+		if (!IsLive) return;
+
 		EXP++;
 		if (EXP == NextEXP[Mathf.Min(Level, NextEXP.Length-1)]) {	// 레벨업
 			Level++;
