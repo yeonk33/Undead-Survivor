@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 		Instance = this;
 	}
 
-	private void Start()
+	public void GameStart()
 	{
 		Health = MaxHealth;
 		IsLive = true;
