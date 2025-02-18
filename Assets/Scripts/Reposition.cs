@@ -37,10 +37,12 @@ public class Reposition : MonoBehaviour
 
 			case "Enemy":
 				if (coll.enabled) { // 몹이 살아있다
-					transform.Translate(playerDir * 20 
-						+ new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0)); // 너무 가까이 스폰되면 카메라에 보일수 있음
+					Vector3 dist = playerPosition - myPosition;
+					Vector3 ran = new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), 0);
+					transform.Translate(ran + dist * 2); // 너무 가까이 스폰되면 카메라에 보일수 있음
 				}
 				break;
+
 			default:
 				break;
 		}
