@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 	public bool IsLive;
 
 	[Header("# Player Info")]
+	public int PlayerId;
 	public float Health;
 	public float MaxHealth = 100;
 	public int Level;
@@ -31,11 +32,14 @@ public class GameManager : MonoBehaviour
 		Instance = this;
 	}
 
-	public void GameStart()
+	public void GameStart(int id)
 	{
+		PlayerId = id;
 		Health = MaxHealth;		
-		// @@임시로 일단 근접무기 지급
-		UILevelUp.Select(0);
+		Player.gameObject.SetActive(true);
+
+		// @@임시로 일단 플레이어 아이디의 무기 지급
+		UILevelUp.Select(PlayerId % 2);
 		Resume();
 	}
 

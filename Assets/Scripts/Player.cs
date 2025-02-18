@@ -7,12 +7,14 @@ public class Player : MonoBehaviour
     public Vector2 inputVec;
     public Scanner Scanner;
     public Hand[] Hands;
+    public RuntimeAnimatorController[] AniControllers;
 
     private Rigidbody2D rigid;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
-    private void Start()
+
+	private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -20,6 +22,11 @@ public class Player : MonoBehaviour
         Scanner = GetComponent<Scanner>();
         Hands = GetComponentsInChildren<Hand>(true); // true : 비활성화된 자식도 Get
     }
+	private void OnEnable()
+	{
+        speed *= Character.Speed;
+        animator.runtimeAnimatorController = AniControllers[GameManager.Instance.PlayerId];
+	}
 
 	private void FixedUpdate()
 	{

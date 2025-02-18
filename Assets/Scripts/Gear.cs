@@ -61,11 +61,13 @@ public class Gear : MonoBehaviour
 		foreach (var item in weapons) {
 			switch (item.Id) {
 				case 0:
-					item.Speed = 150 + (150 * Rate);
+					float speed = 150 * Character.WeaponSpeed;
+					item.Speed = speed + (speed * Rate);
 					break;
 
 				default:
-					item.Speed = 0.5f * (1f - Rate);
+					speed = 0.5f * Character.WeaponRate;
+					item.Speed = speed * (1f - Rate);
 					break;
 					
 			}
@@ -77,7 +79,7 @@ public class Gear : MonoBehaviour
 	/// </summary>
 	private void SpeedUp()
 	{
-		float speed = 3f;
+		float speed = 3f * Character.Speed;
 		GameManager.Instance.Player.speed = speed + speed * Rate;
 
 	}

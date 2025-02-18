@@ -49,8 +49,8 @@ public class Weapon : MonoBehaviour
 
 		// Property setting
 		Id = data.ItemId;
-		Damage = data.BaseDamage;
-		Count = data.BaseCount;
+		Damage = data.BaseDamage * Character.Damage; // 각 캐릭터의 데미지 배율을 곱해줌
+		Count = data.BaseCount + Character.Count;	// 각 캐릭터의 타격회수를 더해줌
 
 		for (int i = 0; i < GameManager.Instance.Pool.Prefabs.Length; i++) {
 			if (data.Projectile == GameManager.Instance.Pool.Prefabs[i]) {
@@ -61,12 +61,12 @@ public class Weapon : MonoBehaviour
 
 		switch (Id) {
 			case 0:
-				Speed = -150;   // 마이너스여야 시계방향
+				Speed = 150 * Character.WeaponSpeed;   // 마이너스여야 시계방향
 				Batch();
 				break;
 
 			default:
-				Speed = 0.3f;	// 연사속도 (0.3f초마다 발사)
+				Speed = 0.5f * Character.WeaponRate;	// 연사속도 (0.5f초마다 발사)
 				break;
 		}
 
@@ -103,7 +103,7 @@ public class Weapon : MonoBehaviour
 
 	public void LevelUp(float dmg, int count)
 	{
-		this.Damage = dmg;
+		this.Damage = dmg * Character.Damage;
 		this.Count += count;
 
 		if (Id == 0) Batch();
