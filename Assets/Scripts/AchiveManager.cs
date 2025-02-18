@@ -84,7 +84,8 @@ public class AchiveManager : MonoBehaviour
 
 	IEnumerator NoticeRoutine()
 	{
-		UiNotice.SetActive(true);	// 활성화
+		UiNotice.SetActive(true);   // 활성화
+		AudioManager.Instance.PlaySFX(AudioManager.SFX.LevelUp);
 		yield return wait;			// 5초뒤에
 		UiNotice.SetActive(false);	// 비활성화
 	}

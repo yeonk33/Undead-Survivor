@@ -78,19 +78,21 @@ public class Enemy : MonoBehaviour
 		if (Health > 0) {
 			// Hit action
 			animator.SetTrigger("Hit");
+			AudioManager.Instance.PlaySFX(AudioManager.SFX.Hit);
 
 		} else {
 			isLive = false;
 			coll.enabled = false;
 			rigid.simulated = false;
-			spriteRenderer.sortingOrder -= 1;
+			spriteRenderer.sortingOrder = 1;
 			animator.SetBool("Dead", true);
 			GameManager.Instance.Kill++;
 			GameManager.Instance.GetEXP();
 
-			//Dead();
+			if (GameManager.Instance.IsLive) {
+				AudioManager.Instance.PlaySFX(AudioManager.SFX.Dead);
+			}
 		}
-
 	}
 
 	private IEnumerator KnockBack()

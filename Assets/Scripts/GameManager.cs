@@ -41,6 +41,9 @@ public class GameManager : MonoBehaviour
 		// @@임시로 일단 플레이어 아이디의 무기 지급
 		UILevelUp.Select(PlayerId % 2);
 		Resume();
+
+		AudioManager.Instance.PlayBGM(true);
+		AudioManager.Instance.PlaySFX(AudioManager.SFX.Select);
 	}
 
 	public void GameOver()
@@ -57,6 +60,9 @@ public class GameManager : MonoBehaviour
 		UIResult.gameObject.SetActive(true);
 		UIResult.Lose();
 		Stop();
+
+		AudioManager.Instance.PlayBGM(false);
+		AudioManager.Instance.PlaySFX(AudioManager.SFX.Lose);
 	}
 
 	public void GameVictory()
@@ -74,6 +80,9 @@ public class GameManager : MonoBehaviour
 		UIResult.gameObject.SetActive(true);
 		UIResult.Win();
 		Stop();
+
+		AudioManager.Instance.PlayBGM(false);
+		AudioManager.Instance.PlaySFX(AudioManager.SFX.Win);
 	}
 
 	public void GameRetry()
