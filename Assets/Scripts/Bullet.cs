@@ -23,19 +23,26 @@ public class Bullet : MonoBehaviour
 		this.Damage = dmg;
 		this.Per = per;
 
-		if (per > -1) {	// 원거리 무기에만 아래 적용
+		if (per >= 0) {	// 원거리 무기에만 아래 적용
 			rigid.velocity = dir * 15f;
 		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (!collision.CompareTag("Enemy") || Per == -1) return;
+		if (!collision.CompareTag("Enemy") || Per == -100) return;
 
 		Per--;
-		if (Per == -1) {
+		if (Per <= 0) {
 			rigid.velocity = Vector2.zero;
 			gameObject.SetActive(false);	// object pooling
 		}
+	}
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+		if (!collision.CompareTag("Area") || Per == -100) return;
+
+		gameObject.SetActive(false);	// 플레이어의 Area 밖이면 총알 삭제
 	}
 }
