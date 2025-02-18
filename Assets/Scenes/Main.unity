@@ -12343,7 +12343,7 @@ MonoBehaviour:
   UIResult: {fileID: 1108298598}
   EnemyCleaner: {fileID: 2000410990}
   GameTime: 0
-  MaxGameTime: 20
+  MaxGameTime: 300
   IsLive: 0
   PlayerId: 0
   Health: 0
@@ -12351,7 +12351,7 @@ MonoBehaviour:
   Level: 0
   Kill: 0
   EXP: 0
-  NextEXP: 0100000002000000030000000400000005000000060000000700000008000000090000000a000000
+  NextEXP: 03000000050000000a0000006400000096000000d20000001801000068010000c201000058020000
 --- !u!1 &907727124
 GameObject:
   m_ObjectHideFlags: 0
@@ -13051,6 +13051,7 @@ MonoBehaviour:
     SpriteType: 1
     Health: 15
     Speed: 2.4
+  LevelTime: 0
 --- !u!1 &1108298596
 GameObject:
   m_ObjectHideFlags: 0
