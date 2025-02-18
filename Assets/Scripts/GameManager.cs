@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
 	public Player Player;
 	public LevelUp UILevelUp;
 	public Result UIResult;
+	public Transform UIJoy;
 	public GameObject EnemyCleaner;
 
 	[Header("# Game Control")]
@@ -90,6 +91,11 @@ public class GameManager : MonoBehaviour
 		SceneManager.LoadScene(0);
 	}
 
+	public void GameQuit()
+	{
+		Application.Quit();
+	}
+
 	private void Update()
 	{
 		if (!IsLive) return;
@@ -118,11 +124,13 @@ public class GameManager : MonoBehaviour
 	{
 		IsLive = false;
 		Time.timeScale = 0;	// 유니티의 시간
+		UIJoy.localScale = Vector3.zero;
 	}
 
 	public void Resume()
 	{
 		IsLive = true;
 		Time.timeScale = 1; // 유니티의 시간
+		UIJoy.localScale = Vector3.one;
 	}
 }
